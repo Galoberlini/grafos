@@ -1,0 +1,43 @@
+def cuenta_grado(grafo_lista):
+    
+    listgrados = {}
+    (vert , arst) = grafo_lista 
+    for i in vert:
+        listgrados[i] = 0
+        for n in range (len(arst)):
+            if arst[n][0] == i and arst[n][1] == i:
+                listgrados[i] += 2
+            elif arst[n][0] == i or arst[n][1] == i:
+                listgrados[i] += 1
+
+    
+    return listgrados
+
+def vertice_aislado(grafo_lista):
+        nuevografo = cuenta_grado(grafo_lista)
+        vertaislados = []
+        for arista , grados in nuevografo.items():
+            if 0 == grados:
+                vertaislados.append(arista)
+    
+        return vertaislados
+
+def componentes_conexas(grafo_lista):
+    '''
+    Dado un grafo en representacion de lista, obtiene sus componentes conexas.
+    Ejemplo Entrada: 
+        (['A','B','C','D','E'],[('A','B'),('B','C'),('C','B'),('D','E')])
+    Ejemplo formato salida: 
+        [['A, 'B','C'], ['D','E']]
+    '''
+    (vert , arst) = grafo_lista 
+    compConex = []    
+            
+    return compConex
+
+def es_conexo(grafo_lista):
+    '''
+    Dado un grafo en representacion de lista, y utilizando la función "componentes_conexas"
+    devuelve True/False si el grafo es o no conexo.
+    '''
+    pass
