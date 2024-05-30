@@ -29,11 +29,33 @@ def componentes_conexas(grafo_lista):
         (['A','B','C','D','E'],[('A','B'),('B','C'),('C','B'),('D','E')])
     Ejemplo formato salida: 
         [['A, 'B','C'], ['D','E']]
-    '''
+       '''
     (vert , arst) = grafo_lista 
+    aux = 0
     compConex = []    
-            
+    listConex = []
+    for v in range (vert):
+        
+        compConex[aux].append(conex(grafo_lista,vert[v],listConex))
+
     return compConex
+
+def conex(grafo_lista , verticeBusqueda , listConex):
+    (vert , arst) = grafo_lista
+    listReturn = listConex
+    for j in arst:
+        if (j[0] == verticeBusqueda):
+            if j[1] not in listReturn:
+                listReturn.append(j[1])
+                conex(grafo_lista, j[1] , listReturn)
+        elif (j[1] == verticeBusqueda):
+            if j[0] not in listReturn:
+                listReturn.append(j[0])
+                conex(grafo_lista, j[0] , listReturn)
+        
+    return listReturn
+
+    
 
 def es_conexo(grafo_lista):
     '''
@@ -41,3 +63,10 @@ def es_conexo(grafo_lista):
     devuelve True/False si el grafo es o no conexo.
     '''
     pass
+
+'''fetch (dominio/ruta)
+ ,data) data es el objeto que se pasa a la ruta 
+ .then (response)
+ .then json => ... 
+ app.get("/ruta",...) 
+'''
