@@ -1,0 +1,54 @@
+def cuenta_grado(grafo_lista):
+    (vert , arst) = grafo_lista 
+    listgrados = {v: 0 for v in vert}
+    for i in vert:
+        for n in range (len(arst)):
+            if arst[n][0] == i and arst[n][1] == i:
+                listgrados[i] += 2
+            elif arst[n][0] == i or arst[n][1] == i:
+                listgrados[i] += 1
+
+    
+    return listgrados
+def vertice_aislado(grafo_lista):
+    nuevografo = cuenta_grado(grafo_lista)
+    vertaislados = []
+    for arista , grados in nuevografo.items():
+        if 0 == grados :
+            vertaislados.append(arista)
+    
+    return vertaislados
+
+    
+def componentes_conexas(grafo_lista):
+
+    (vert , arst) = grafo_lista 
+    aux = 0
+    compConex = []    
+    listConex = []
+    for v in range (len(vert)):
+        if sorted(conex(grafo_lista,vert[v],[])) not in compConex:
+            compConex.append(sorted(conex(grafo_lista,vert[v],[])))
+            
+
+    return compConex
+
+def conex(grafo_lista , verticeBusqueda , listConex):
+    (vert , arst) = grafo_lista
+    listReturn = listConex
+    for j in arst:
+        if (j[0] == verticeBusqueda):
+            if j[1] not in listReturn:
+                listReturn.append(j[1])
+                conex(grafo_lista, j[1] , listReturn)
+        elif (j[1] == verticeBusqueda):
+            if j[0] not in listReturn:
+                listReturn.append(j[0])
+                conex(grafo_lista, j[0] , listReturn)
+
+    return listReturn
+
+
+
+def es_conexo(grafo_lista):
+    return len(componentes_conexas(grafo_lista)) == 1
